@@ -1,6 +1,8 @@
 package com.yxhuang.di
 
 import android.app.Application
+import com.yxhuang.di.dagger.storage.SharedPreferencesStorage
+import com.yxhuang.di.dagger.user.UserManager
 
 /**
  * Created by yxhuang
@@ -9,7 +11,7 @@ import android.app.Application
  */
 class AppApplication : Application() {
 
-    override fun onCreate() {
-        super.onCreate()
+    internal val userManager by lazy {
+        UserManager(SharedPreferencesStorage(this))
     }
 }
