@@ -6,13 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yxhuang.di.dagger.MAIN_TAG
 import com.yxhuang.di.dagger.user.UserDataRepository
+import javax.inject.Inject
 
 /**
  * Created by yxhuang
  * Date: 2023/6/28
  * Description:
  */
-class MainViewModel(
+class MainViewModel @Inject constructor(
     private val userDataRepository: UserDataRepository
 ): ViewModel() {
 

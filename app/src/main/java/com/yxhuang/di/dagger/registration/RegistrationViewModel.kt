@@ -2,14 +2,15 @@ package com.yxhuang.di.dagger.registration
 
 import androidx.lifecycle.ViewModel
 import com.yxhuang.di.dagger.user.UserManager
+import javax.inject.Inject
 
 /**
  * Created by yxhuang
  * Date: 2023/7/2
  * Description:
  */
-class RegistrationViewModel(
-        private val userManager: UserManager
+class RegistrationViewModel @Inject constructor(
+    private val userManager: UserManager
 ) : ViewModel() {
 
     private var username: String? = null

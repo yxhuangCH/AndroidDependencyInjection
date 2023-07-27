@@ -1,13 +1,16 @@
 package com.yxhuang.di.dagger.user
 
 import com.yxhuang.di.dagger.storage.Storage
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by yxhuang
  * Date: 2023/6/20
  * Description:
  */
-class UserManager(
+@Singleton
+class UserManager @Inject constructor(
     private val storage: Storage
 ) {
     companion object {

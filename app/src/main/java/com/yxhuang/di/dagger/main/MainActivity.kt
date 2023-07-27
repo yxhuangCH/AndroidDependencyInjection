@@ -5,19 +5,29 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.yxhuang.di.AppApplication
 import com.yxhuang.di.R
 import com.yxhuang.di.dagger.MAIN_TAG
+import com.yxhuang.di.dagger.login.LoginActivity
 import com.yxhuang.di.dagger.registration.RegistrationActivity
 import com.yxhuang.di.dagger.setting.SettingsActivity
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
 
-    private var mainViewModel: MainViewModel?= null
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val mainViewModel by viewModels<MainViewModel> {
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as AppApplication).appComponent.mainComponent().create().inject(this)
         super.onCreate(savedInstanceState)
 
         val userManager = (application as AppApplication).userManager
@@ -27,13 +37,13 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, RegistrationActivity::class.java))
                 finish()
             } else {
-                startActivity(Intent(this, SettingsActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
         } else {
             setContentView(R.layout.activity_main)
 
-            mainViewModel = MainViewModel(userManager.userDataRepository!!)
+//            mainViewModel = MainViewModel(userManager.userDataRepository!!)
             setupViews()
             mainViewModel?.getData()
         }

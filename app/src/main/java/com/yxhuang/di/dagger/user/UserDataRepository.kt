@@ -1,5 +1,6 @@
 package com.yxhuang.di.dagger.user
 
+import javax.inject.Inject
 import kotlin.random.Random
 
 /**
@@ -7,7 +8,7 @@ import kotlin.random.Random
  * Date: 2023/6/20
  * Description:
  */
-class UserDataRepository(
+class UserDataRepository @Inject constructor(
     private val userManager: UserManager
 ) {
 

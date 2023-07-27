@@ -2,12 +2,16 @@ package com.yxhuang.di.dagger.registration
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.yxhuang.di.AppApplication
 import com.yxhuang.di.R
+import com.yxhuang.di.dagger.login.LoginViewModel
 import com.yxhuang.di.dagger.main.MainActivity
 import com.yxhuang.di.dagger.registration.enterdetails.EnterDetailsFragment
 import com.yxhuang.di.dagger.registration.termsandconditions.TermsAndConditionsFragment
+import javax.inject.Inject
 
 /**
  * Created by yxhuang
@@ -16,13 +20,18 @@ import com.yxhuang.di.dagger.registration.termsandconditions.TermsAndConditionsF
  */
 class RegistrationActivity : AppCompatActivity() {
 
-    lateinit var registrationViewModel: RegistrationViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val registrationViewModel by viewModels<RegistrationViewModel> { viewModelFactory }
+
+//    lateinit var registrationViewModel: RegistrationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as AppApplication).appComponent.registrationComponent().create().inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        registrationViewModel = RegistrationViewModel((application as AppApplication).userManager)
+//        registrationViewModel = RegistrationViewModel((application as AppApplication).userManager)
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_holder, EnterDetailsFragment())
             .commit()

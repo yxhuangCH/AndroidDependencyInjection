@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yxhuang.di.dagger.user.UserManager
+import javax.inject.Inject
 
 /**
  * Created by yxhuang
  * Date: 2023/7/2
  * Description:
  */
-class LoginViewModel(
+class LoginViewModel @Inject constructor(
     private val userManager: UserManager
 ) : ViewModel() {
 

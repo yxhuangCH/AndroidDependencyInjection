@@ -3,13 +3,14 @@ package com.yxhuang.di.dagger.registration.enterdetails
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
 /**
  * Created by yxhuang
  * Date: 2023/7/2
  * Description:
  */
-class EnterDetailsViewModel : ViewModel() {
+class EnterDetailsViewModel @Inject constructor(): ViewModel() {
 
     companion object {
         private const val MAX_LENGTH = 5

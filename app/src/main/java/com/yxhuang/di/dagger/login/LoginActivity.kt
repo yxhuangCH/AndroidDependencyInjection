@@ -7,13 +7,16 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.ViewModelProvider
 import com.yxhuang.di.AppApplication
 import com.yxhuang.di.R
 import com.yxhuang.di.dagger.main.MainActivity
 import com.yxhuang.di.dagger.registration.RegistrationActivity
+import javax.inject.Inject
 
 /**
  * Created by yxhuang
@@ -22,14 +25,19 @@ import com.yxhuang.di.dagger.registration.RegistrationActivity
  */
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: LoginViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<LoginViewModel> { viewModelFactory }
+
+
     private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as AppApplication).appComponent.loginComponent().create().inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        viewModel = LoginViewModel((application as AppApplication).userManager)
+//        viewModel = LoginViewModel((application as AppApplication).userManager)
         viewModel.loginState.observe(this){ state ->
             when(state) {
                 is LoginSuccess -> {

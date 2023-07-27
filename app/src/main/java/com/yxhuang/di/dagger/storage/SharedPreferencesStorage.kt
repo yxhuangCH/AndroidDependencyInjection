@@ -3,13 +3,14 @@ package com.yxhuang.di.dagger.storage
 import android.content.Context
 import android.util.Log
 import com.yxhuang.di.dagger.MAIN_TAG
+import javax.inject.Inject
 
 /**
  * Created by yxhuang
  * Date: 2023/6/28
  * Description:
  */
-class SharedPreferencesStorage(context: Context) : Storage {
+class SharedPreferencesStorage @Inject constructor(context: Context) : Storage {
 
     private val sharedPreferences = context.getSharedPreferences("Dagger", Context.MODE_PRIVATE)
 
