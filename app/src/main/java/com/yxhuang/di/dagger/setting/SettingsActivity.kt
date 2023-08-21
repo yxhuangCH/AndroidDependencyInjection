@@ -7,9 +7,9 @@ import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.yxhuang.di.AppApplication
 import com.yxhuang.di.R
 import com.yxhuang.di.dagger.login.LoginActivity
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 /**
@@ -24,16 +24,9 @@ class SettingsActivity: AppCompatActivity() {
     private val settingsViewModel by viewModels<SettingsViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        (application as AppApplication).appComponent.settingComponent().create().inject(this)
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.activity_settings)
-
-//        val userManager = (application as AppApplication).userManager
-
-//        settingsViewModel = SettingsViewModel(
-//            userManager.userDataRepository!!,
-//            userManager
-//        )
 
         setupViews()
     }

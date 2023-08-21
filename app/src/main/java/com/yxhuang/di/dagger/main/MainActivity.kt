@@ -14,6 +14,7 @@ import com.yxhuang.di.dagger.MAIN_TAG
 import com.yxhuang.di.dagger.login.LoginActivity
 import com.yxhuang.di.dagger.registration.RegistrationActivity
 import com.yxhuang.di.dagger.setting.SettingsActivity
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as AppApplication).appComponent.mainComponent().create().inject(this)
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         val userManager = (application as AppApplication).userManager
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             setContentView(R.layout.activity_main)
 
-//            mainViewModel = MainViewModel(userManager.userDataRepository!!)
             setupViews()
             mainViewModel?.getData()
         }

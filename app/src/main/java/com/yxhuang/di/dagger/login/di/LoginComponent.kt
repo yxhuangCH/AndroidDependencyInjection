@@ -1,6 +1,5 @@
 package com.yxhuang.di.dagger.login.di
 
-import com.yxhuang.di.dagger.login.LoginActivity
 import dagger.Subcomponent
 
 /**
@@ -15,6 +14,4 @@ interface LoginComponent {
     interface Factory {
         fun create(): LoginComponent
     }
-
-    fun inject(activity: LoginActivity)
 }

@@ -1,7 +1,6 @@
 package com.yxhuang.di.dagger.login
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,13 +8,12 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
-import com.yxhuang.di.AppApplication
 import com.yxhuang.di.R
 import com.yxhuang.di.dagger.main.MainActivity
 import com.yxhuang.di.dagger.registration.RegistrationActivity
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 /**
@@ -33,11 +31,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as AppApplication).appComponent.loginComponent().create().inject(this)
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-//        viewModel = LoginViewModel((application as AppApplication).userManager)
         viewModel.loginState.observe(this){ state ->
             when(state) {
                 is LoginSuccess -> {

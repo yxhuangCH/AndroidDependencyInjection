@@ -1,6 +1,5 @@
 package com.yxhuang.di.dagger.setting.di
 
-import com.yxhuang.di.dagger.setting.SettingsActivity
 import dagger.Subcomponent
 
 /**
@@ -15,6 +14,4 @@ interface SettingComponent {
     interface Factory {
         fun create(): SettingComponent
     }
-
-    fun inject(activity: SettingsActivity)
 }

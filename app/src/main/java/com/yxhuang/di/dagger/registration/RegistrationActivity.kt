@@ -11,6 +11,7 @@ import com.yxhuang.di.dagger.login.LoginViewModel
 import com.yxhuang.di.dagger.main.MainActivity
 import com.yxhuang.di.dagger.registration.enterdetails.EnterDetailsFragment
 import com.yxhuang.di.dagger.registration.termsandconditions.TermsAndConditionsFragment
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 /**
@@ -27,7 +28,8 @@ class RegistrationActivity : AppCompatActivity() {
 //    lateinit var registrationViewModel: RegistrationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as AppApplication).appComponent.registrationComponent().create().inject(this)
+//        (application as AppApplication).appComponent.registrationComponent().create().inject(this)
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 

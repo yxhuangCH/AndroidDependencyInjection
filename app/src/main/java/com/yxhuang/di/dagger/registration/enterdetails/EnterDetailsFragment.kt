@@ -8,17 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.yxhuang.di.AppApplication
 import com.yxhuang.di.R
 import com.yxhuang.di.dagger.registration.RegistrationActivity
 import com.yxhuang.di.dagger.registration.RegistrationViewModel
+import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
 /**
@@ -27,9 +25,6 @@ import javax.inject.Inject
  * Description:
  */
 class EnterDetailsFragment : Fragment() {
-
-//    private lateinit var registrationViewModel: RegistrationViewModel
-//    private lateinit var enterDetailsViewModel: EnterDetailsViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -46,8 +41,6 @@ class EnterDetailsFragment : Fragment() {
             savedInstanceState: Bundle?)
     : View? {
         val view = inflater.inflate(R.layout.fragment_enter_details, container, false)
-//        registrationViewModel = (activity as RegistrationActivity).registrationViewModel
-//        enterDetailsViewModel = EnterDetailsViewModel()
         enterDetailsViewModel.enterDetailsViewState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is EnterDetailsSuccess ->{
@@ -70,7 +63,7 @@ class EnterDetailsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as AppApplication).appComponent.registrationComponent().create().inject(this)
+        AndroidSupportInjection.inject(this)
     }
 
     private fun setupView(view: View) {
